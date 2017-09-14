@@ -5,7 +5,7 @@ RSpec.describe "antibodies/edit", type: :view do
     @antibody = assign(:antibody, Antibody.create!(
       :name => "MyString",
       :amount => "9.99",
-      :panel => nil
+      :panel => Panel.create!(name: 'Sample Panel')
     ))
   end
 
