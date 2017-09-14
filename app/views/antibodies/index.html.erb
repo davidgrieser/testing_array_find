@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Antibodies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Panel</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @antibodies.each do |antibody| %>
+      <tr>
+        <td><%= antibody.name %></td>
+        <td><%= antibody.amount %></td>
+        <td><%= antibody.panel %></td>
+        <td><%= link_to 'Show', antibody %></td>
+        <td><%= link_to 'Edit', edit_antibody_path(antibody) %></td>
+        <td><%= link_to 'Destroy', antibody, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Antibody', new_antibody_path %>

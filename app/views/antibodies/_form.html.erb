@@ -1,0 +1,32 @@
+<%= form_with(model: antibody, local: true) do |form| %>
+  <% if antibody.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(antibody.errors.count, "error") %> prohibited this antibody from being saved:</h2>
+
+      <ul>
+      <% antibody.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :antibody_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, id: :antibody_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :panel_id %>
+    <%= form.text_field :panel_id, id: :antibody_panel_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

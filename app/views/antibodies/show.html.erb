@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @antibody.name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @antibody.amount %>
+</p>
+
+<p>
+  <strong>Panel:</strong>
+  <%= @antibody.panel %>
+</p>
+
+<%= link_to 'Edit', edit_antibody_path(@antibody) %> |
+<%= link_to 'Back', antibodies_path %>
