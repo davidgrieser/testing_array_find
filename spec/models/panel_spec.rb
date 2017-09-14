@@ -1,5 +1,45 @@
 require 'rails_helper'
 
 RSpec.describe Panel, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.find_matching_antibodies' do
+    context 'given an empty array' do
+      it 'should return []' do
+        expect(Panel.find_matching_antibodies([])).to eq([])
+      end
+    end
+
+    context 'given an array with 1 antibody' do
+      context 'given a panel that has only that antibody' do
+        it 'should return that panel' do
+          panel = Panel.create(name: 'Sample Panel')
+          antibody = Antibody.create(
+              name: 'Antibody',
+              amount: 9.99,
+              panel: panel
+          )
+
+          expect(Panel.find_matching_antibodies([antibody])).to eq([panel])
+        end
+      end
+      context 'given a panel that has only a different antibody' do
+        it 'should return []'
+      end
+    end
+    context 'given an array with 2 anitbodies' do
+      context 'given a matching set of antibodies on a panel' do
+        it 'should return that panel'
+      end
+      context 'given a panel with 2 antibodies that do not match' do
+        it 'should return []'
+      end
+    end
+    context 'given an array with 3 anitbodies' do
+      context 'given a matching set of antibodies on a panel' do
+        it 'should return that panel'
+      end
+      context 'given a panel with 3 antibodies that do not match' do
+        it 'should return []'
+      end
+    end
+  end
 end
