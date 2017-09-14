@@ -22,9 +22,23 @@ RSpec.describe Panel, type: :model do
         end
       end
       context 'given a panel that has only a different antibody' do
-        it 'should return []'
+        it 'should return []' do
+          panel_one = Panel.create(name: 'Sample Panel One')
+          antibody_one = Antibody.create(
+              name: 'Antibody One',
+              amount: 9.99,
+              panel: panel_one
+          )
+          antibody_two = Antibody.new(
+              name: 'Antibody Two',
+              amount: 9.99
+          )
+
+          expect(Panel.find_matching_antibodies([antibody_two])).to eq([])
+        end
       end
     end
+
     context 'given an array with 2 anitbodies' do
       context 'given a matching set of antibodies on a panel' do
         it 'should return that panel'
