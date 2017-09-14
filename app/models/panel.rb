@@ -7,6 +7,6 @@ class Panel < ApplicationRecord
 
   def self.find_matching_antibodies(antibodies)
     return [] if antibodies.blank?
-    Panel.joins(:antibodies).where(antibodies: {name: antibodies[0].name})
+    Panel.joins(:antibodies).where(antibodies: {name: antibodies.map(&:name)})
   end
 end
