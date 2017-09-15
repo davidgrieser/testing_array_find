@@ -19,6 +19,8 @@ class Panel < ApplicationRecord
     full_sql = panels.map(&:to_sql).join(" intersect ")
 
     # Panel.find_by_sql("#{panel_set_a.to_sql} intersect #{panel_set_b.to_sql} intersect #{result_matching_count.to_sql}")
-    Panel.find_by_sql(full_sql)
+    results = Panel.find_by_sql(full_sql)
+
+    results.select { |panel| (panel.antibodies.map(&:name) - antibodies.map(&:name)).empty? }
   end
 end
