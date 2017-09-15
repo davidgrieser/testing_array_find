@@ -107,6 +107,14 @@ RSpec.describe Panel, type: :model do
         end
       end
 
+      context 'given an array with antibodies A, A, and C' do
+        subject(:panel) { Panel.find_matching_antibodies(create_antibodies(%w(A A C))) }
+
+        it 'should return []' do
+          expect(panel).to eq([])
+        end
+      end
+
       context 'given a panel with 3 antibodies that do not match' do
         subject(:panel) { Panel.find_matching_antibodies(create_antibodies(%w(D E F))) }
 
