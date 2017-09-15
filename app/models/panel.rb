@@ -10,17 +10,21 @@ class Panel < ApplicationRecord
     # Panel.joins(:antibodies).where(antibodies: {name: antibodies.map(&:name)})
 
     panels = []
-    # panel_set_a = Panel.joins(:antibodies).where(antibodies: { name: set_2[1].name })
+    # Find each Panel that has a matching Antibody
     antibodies.each do |antibody|
       panels << Panel.joins(:antibodies).where(antibodies: { name: antibody.name })
     end
 
+    # Find all Panels that the same number of Antibodies as the input
     panels << Panel.joins(:antibodies).group('panels.id').having("count(panel_id) = #{antibodies.count}")
+
+    # Find the intersection of all matching panels from the above queries
     full_sql = panels.map(&:to_sql).join(" intersect ")
 
-    # Panel.find_by_sql("#{panel_set_a.to_sql} intersect #{panel_set_b.to_sql} intersect #{result_matching_count.to_sql}")
+    # Perform the actual SQL query
     results = Panel.find_by_sql(full_sql)
 
+    # Select only those records that exactly match - handles duplicates
     results.select { |panel| (panel.antibodies.map(&:name) - antibodies.map(&:name)).empty? }
   end
 end
