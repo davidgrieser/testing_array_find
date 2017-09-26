@@ -17,12 +17,14 @@ RSpec.describe Panel, type: :model do
       antibodies
     end
 
+    def build_antibodies(letters)
+      letters.collect { |letter| build(:antibody, name: "Antibody #{letter}") }
+    end
+
     let!(:sample_panel_single_antibody) {
-      Panel.create(
-        name: 'Sample Panel Single Antibody',
-        antibodies: [create_antibody('A')]
-      )
+      create(:panel, antibodies: build_antibodies(['A']))
     }
+
     let!(:sample_panel_two_antibodies) {
       Panel.create(
         name: 'Sample Panel Two Antibodies',
