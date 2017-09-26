@@ -26,16 +26,11 @@ RSpec.describe Panel, type: :model do
     }
 
     let!(:sample_panel_two_antibodies) {
-      Panel.create(
-        name: 'Sample Panel Two Antibodies',
-        antibodies: create_antibodies(%w(A B))
-      )
+      create(:panel, antibodies: build_antibodies('A'..'B'))
     }
+
     let!(:sample_panel_three_antibodies) {
-      Panel.create(
-        name: 'Sample Panel Three Antibodies',
-        antibodies: create_antibodies(%w(A B C))
-      )
+      create(:panel, antibodies: build_antibodies('A'..'C'))
     }
 
     context 'given an empty array' do
